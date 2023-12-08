@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="images/earth.jpeg" rel="icon">
+  <!--link href="css/bootstrap.css" rel="stylesheet"-->
+  <style>
+    h1{
+      font-size:40px;
+      color:#dd4325;
+      margin:10px;
+      font-family:'Arial',sans-serif;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+
+    #clock-container {
+      display: flex;
+      justify-content: space-around;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .clock {
+      border: 2px solid #333;
+      border-radius: 8px;
+      padding: 10px;
+      margin: 10px;
+    }
+    .row{
+      height:300px;
+      width:100%;
+      /*border:1px solid;*/
+      padding:5px;
+    }
+    .col{
+      float:left;
+      margin:5px;
+      border-radius:5px;
+    }
+  </style>
+  <title>World Clock</title>
+</head>
+<body>
+  <header><h1>World Clock</h1></header>
+  
+  <div id="clock-container">
+    <div class="row">
+      <div class="col">
+        <img src="images/america.jpg" alt="image not support" style="height:220px; width:318px;"><h1>USA</h1>
+    <div id="new-york" class="clock"></div>
+      </div>
+      <div class="col">
+        <img src="images/london.png" alt="image not support" style="height:220px; width:318px;"><h1>London</h1>
+    <div id="london" class="clock"></div>
+      </div>
+    <div class="col">
+      <img src="images/japan.jpg" alt="image not support" style="height:220px; width:318px;"><h1>Japan</h1>
+    <div id="tokyo" class="clock"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <img src="images/russia.jpg" alt="image not support" style="height:220px; width:318px;"><h1>Russia</h1>
+    <div id="russia" class="clock"></div>
+      </div>
+      <div class="col">
+        <img src="images/china.jpeg" alt="image not support" style="height:220px; width:318px;"><h1>China</h1>
+    <div id="china" class="clock"></div>
+      </div>
+    <div class="col">
+      <img src="images/delhi.jpg" alt="image not support" style="height:220px; width:318px;"><h1>India</h1>
+    <div id="india" class="clock"></div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+  <script>
+    function updateClock(city, offset) {
+      const now = new Date();
+      const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+      const localTime = new Date(utc + (3600000 * offset));
+
+      const hours = localTime.getHours().toString().padStart(2, '0');
+      const minutes = localTime.getMinutes().toString().padStart(2, '0');
+      const seconds = localTime.getSeconds().toString().padStart(2, '0');
+
+      document.getElementById(city).innerText = `${hours}:${minutes}:${seconds}`;
+    }
+
+    function updateClocks() {
+      updateClock('new-york', -5); // New York (UTC-5)
+      updateClock('london', 0);    // London (UTC+0)
+      updateClock('tokyo', 9);     // Tokyo (UTC+9)
+      updateClock('russia', 3);
+      updateClock('china', 8);  //China
+      updateClock('india', 5.50); //India
+    }
+
+    // Initial update
+    updateClocks();
+
+    // Update every second
+    setInterval(updateClocks, 1000);
+  </script>
+</body>
+</html>

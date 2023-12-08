@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>World Clock</title>
+    <link href="images/earth.jpeg" rel="icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script href="js/bootstrap.bundle.js" type="javascript"></script>
+
+    <title>World Clock</title>
+</head>
+<body>
+    <div class="outer ">
+        <div class="row ms-3">
+            <div class="col-sm-3 box mx-3">
+                <div class="india"></div>
+                <div class="name"><p>NEW DELHI</p></div>
+                <div class="time">
+                    <span id="hrs">00</span>
+                    <span>:</span>
+                    <span id="min">00</span>
+                    <span>:</span>
+                    <span id="sec">00</span>
+                </div>
+            </div>
+            <div class="col-sm-3 box mx-3">
+                <div class="china"></div>
+                <div class="name"><p>Beinjing</p></div>
+                <div class="time">
+                    <span id="hrs">00</span>
+                    <span>:</span>
+                    <span id="min">00</span>
+                    <span>:</span>
+                    <span id="sec">00</span>
+                </div>
+            </div>
+            <div class="col-sm-3 box mx-3">
+                <div class="america"></div>
+                <div class="name"><p>Washington DC</p></div>
+                <div class="time">
+                    <span id="hrs">00</span>
+                    <span>:</span>
+                    <span id="min">00</span>
+                    <span>:</span>
+                    <span id="sec">00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let hrs = document.getElementById("hrs");
+        let min = document.getElementById("min");
+        let sec = document.getElementById("sec");
+
+        setInterval(()=>{    
+        let currentTime = new Date();
+
+        hrs.innerHTML = (currentTime.getHours()<10?"0":"")+currentTime.getHours();
+        min.innerHTML = (currentTime.getMinutes()<10?"0":"")+currentTime.getMinutes();
+        sec.innerHTML = (currentTime.getSeconds()<10?"0":"")+currentTime.getSeconds();
+        },1000)
+
+    </script>
+    <script>
+        function updateClock(city, offset) {
+          const now = new Date();
+          const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+          const localTime = new Date(utc + (3600000 * offset));
+    
+          const hours = localTime.getHours().toString().padStart(2, '0');
+          const minutes = localTime.getMinutes().toString().padStart(2, '0');
+          const seconds = localTime.getSeconds().toString().padStart(2, '0');
+    
+          document.getElementById(city).innerText = `${hours}:${minutes}:${seconds}`;
+        }
+    
+        function updateClocks() {
+          updateClock('new-york', -5); // New York (UTC-5)
+          updateClock('london', 0);    // London (UTC+0)
+          updateClock('tokyo', 9);     // Tokyo (UTC+9)
+        }
+    
+        // Initial update
+        updateClocks();
+    
+        // Update every second
+        setInterval(updateClocks, 1000);
+      </script>
+</body>
+</html>
